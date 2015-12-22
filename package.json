@@ -1,0 +1,24 @@
+{
+  "name": "dcraw",
+  "version": "1.0.0",
+  "description": "Convert RAW camera images using JavaScript",
+  "main": "./dist/dcraw.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zfedoran/dcraw.js.git"
+  },
+  "keywords": [
+    "raw",
+    "images",
+    "dcraw"
+  ],
+  "author": "Zelimir Fedoran",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/zfedoran/dcraw.js/issues"
+  },
+  "homepage": "https://github.com/zfedoran/dcraw.js#readme"
+}
