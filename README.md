@@ -1,16 +1,26 @@
 # dcraw.js
-Convert RAW camera images using JavaScript.
+Convert RAW camera images using JavaScript (supported on Node.js and your Browser)
 
 This project is a port of [dcraw.c](http://www.cybercom.net/~dcoffin/dcraw/) using [Emscripten](http://emscripten.org).
 
 ### Install:
+
+#### Node.js
+
 ```
 npm install dcraw
 ```
 
-### Usage:
+#### Browser
 
-Read an example raw file into a buffer
+``` html
+<script src="https://cdn.jsdelivr.net/npm/dcraw"></script>
+```
+
+### Usage
+
+Read a RAW image file into a buffer (or `Uint8Array` in the browser, see browser example [here](https://jsfiddle.net/zfedoran/fy22msxo/))
+
 ``` js
 const fs = require('fs');
 const buf = fs.readFileSync('./example.CR2');
@@ -72,6 +82,7 @@ dcraw(buf, { T: true, 4: true, E: true });
 dcraw(buf, { exportAsTiff: true, use16BitLinearMode: true, useExportMode: true });
 ```
 
+##### Options List
 
 |Option|Type|Description|
 |------|----|-----------|
@@ -110,3 +121,20 @@ dcraw(buf, { exportAsTiff: true, use16BitLinearMode: true, useExportMode: true }
 |**use16BitLinearMode**|boolean|Linear 16-bit, same as "-6 -W -g 1 1"|
 |**exportAsTiff**|boolean|Write TIFF instead of PPM|
 
+### Browser Example
+
+You'll need to do a little bit of work to get a file buffer on the browser. There is a full example available [here](https://jsfiddle.net/zfedoran/fy22msxo/).
+
+``` js
+var reader = new FileReader();
+
+reader.onload = function (e) {
+    // Get the image file as a buffer
+    var buf = new Uint8Array(e.currentTarget.result);
+
+    // Get the RAW metadata
+    const metadata = dcraw(buf, { verbose: true, identify: true });
+};
+
+reader.readAsArrayBuffer(file);
+```
