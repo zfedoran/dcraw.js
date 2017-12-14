@@ -25,14 +25,36 @@ const dcraw = require('dcraw');
 dcraw(buf, { verbose: true, identify: true });
 ```
 
+Result
+
+```
+>   Filename: raw_buf
+    Timestamp: Thu Sep 21 07:17:42 2017
+    Camera: Canon EOS 20D
+    Owner: unknown
+    ISO speed: 3200
+    Shutter: 252.0 sec
+    Aperture: f/inf
+    Focal length: 0.0 mm
+    Embedded ICC profile: no
+    Number of raw images: 1
+    Thumb size:  1536 x 1024
+    Full size:   3596 x 2360
+    Image size:  3522 x 2348
+    Output size: 3522 x 2348
+    Raw colors: 3
+    Filter pattern: RG/GB
+    Daylight multipliers: 2.098645 0.930145 1.180146
+    Camera multipliers: 1021.000000 1015.000000 1018.000000 1015.000000
+```
 
 ##### Convert to TIFF
 
 Convert to TIFF file, and save to disk
 
 ``` js
-const result = dcraw(buf, { exportAsTiff: true });
-fs.writeFileSync('example.tiff', result.files['raw_buf.tiff'])
+const tiffFile = dcraw(buf, { exportAsTiff: true });
+fs.writeFileSync('example.tiff', tiffFile)
 ```
 
 ### Options
@@ -55,9 +77,7 @@ dcraw(buf, { exportAsTiff: true, use16BitLinearMode: true, useExportMode: true }
 |------|----|-----------|
 |**verbose**|boolean|Print verbose messages|
 |**identify**|boolean|Identify files without decoding them (use with '-v' to identify files and show metadata)|
-|**toStandardOutput**|boolean|Write image data to standard output|
 |**extractThumbnail**|boolean|Extract embedded thumbnail image|
-|**updateFileDate**|boolean|Change file dates to camera timestamp|
 |**useCameraWhiteBalance**|boolean|Use camera white balance, if possible|
 |**useAverageWhiteBalance**|boolean|Average the whole image for white balance|
 |**whiteBalanceBox**|x y w h|Average a grey box for white balance|

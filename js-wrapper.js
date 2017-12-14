@@ -45,8 +45,6 @@ var Module = Object.assign((Module || {}), {
         const stdout_list = [];
         Module.print = function(msg) { stdout_list.push(msg); }
 
-        // dcraw(input_raw<Buffer>, options<Object>)
-        //   @returns: An object with the results
         Module.dcraw = function (raw_file, options) {
 
             // We need a raw file buffer to continue...
@@ -165,6 +163,7 @@ var Module = Object.assign((Module || {}), {
             }
 
             // Get the output files and remove the workspace from the virtual file system
+            var num_files = 0;
             const output_files = {};
             const workspace = FS.readdir('/workspace');
             for (var index in workspace) {
@@ -172,6 +171,7 @@ var Module = Object.assign((Module || {}), {
                 if (name !== '.' && name !== '..') {
                     output_files[name] = FS.readFile(name, { encoding: 'binary' });
                     FS.unlink(name);
+                    num_files++;
                 }
             }
 
@@ -179,7 +179,14 @@ var Module = Object.assign((Module || {}), {
             FS.chdir('/');
             FS.rmdir('/workspace');
 
-            return { stdout: stdout_list, files: output_files };
+            if (num_files === 1) {
+                return Object.values(output_files).pop();
+            }
+            if (num_files > 1) {
+                return output_files;
+            }
+
+            return stdout_list.join('\n');
         }
 
         // Wrapper for invoking main() method
