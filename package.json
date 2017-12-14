@@ -1,6 +1,6 @@
 {
   "name": "dcraw",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Convert RAW camera images using JavaScript",
   "main": "./dist/dcraw.js",
   "scripts": {
