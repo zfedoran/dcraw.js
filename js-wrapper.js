@@ -78,7 +78,7 @@ var Module = Object.assign((Module || {}), {
             }
 
             // Build the arguments array for the main() method
-            const args = [];
+            let args = [];
             if (options) {
 
                 if (options.P) {
