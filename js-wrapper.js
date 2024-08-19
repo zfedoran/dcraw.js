@@ -1,6 +1,6 @@
 // WARNING: Don't use fancy ES6 in this file, the EMSCRIPTEN minifier does not support it yet.
 
-const EM_RAW_OPTIONS = {
+let EM_RAW_OPTIONS = {
     verbose: 'v',                    //<boolean>  Print verbose messages
     identify: 'i',                   //<boolean>  Identify files without decoding them (use with '-v' to identify files and show metadata)
     toStandardOutput: 'c',           //<boolean>  Write image data to standard output
